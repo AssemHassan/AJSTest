@@ -1,24 +1,30 @@
 (function () {
-'use strict';
+  'use strict';
 
-angular.module('MsgApp', [])
-.controller('MsgController', MsgController);
+  angular.module('MsgApp', [])
+    .controller('MsgController', MsgController);
 
-MsgController.$inject = ['$scope', '$filter'];
-function MsgController($scope, $filter) {
-  $scope.name = "Yaakov";
-  $scope.stateOfBeing = "hungry";
-  $scope.cookieCost = .45;
+  MsgController.$inject = ['$scope', '$filter'];
+  function MsgController($scope, $filter) {
 
-  $scope.sayMessage = function () {
-    var msg = "Yaakov likes to eat healthy snacks at night!";
-    var output = $filter('uppercase')(msg);
-    return output;
-  };
+    $scope.dishes = '';
+    var msg = '';
+    $scope.sayMessage = function () {
 
-  $scope.feedYaakov = function () {
-    $scope.stateOfBeing = "fed";
-  };
-}
+      return msg;
+    };
+
+    $scope.checkIf2Much = function () {
+      var elements = $scope.dishes.split(',');
+      if (elements.length == 1 && elements[0].length == 0 )
+        msg = 'Please input dishes';
+      else {
+        if (elements.length > 3)
+          msg = 'Too much!';
+        else if (elements.length < 4)
+          msg = 'Enjoy!';
+      }
+    };
+  }
 
 })();
